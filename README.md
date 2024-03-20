@@ -29,7 +29,7 @@ Before running the application, ensure that you have the following installed:
 ## Installation
 
 1. Clone the repository:
-git clone https://github.com/jerryola1/LLM-CHAT-WEBAPP.git
+<pre><code onclick="navigator.clipboard.writeText(this.textContent)">git clone https://github.com/your-username/llm-chat-webapp.git</code></pre>
 
 
 Copy code
