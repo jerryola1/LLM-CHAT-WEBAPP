@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'pxplus_ibm_vga8regular';
+    src: url('/css/PxPlus_IBM_VGA8.woff') format('woff');
+    src: url('/css/PxPlus_IBM_VGA8.ttf') format('truetype');
+    font-weight: normal;
+
+}
+@font-face {
+    font-family: 'pc98';
+    src: url('/css/PC_9800.woff2') format('woff2'),
+	url('/css/PC_9800.woff') format('woff'),
+	url('/css/pc-9800.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	line-height: 1.2;
+	font-family: "pxplus_ibm_vga8regular";
+}
+
+pre, .kana, .blog > h1,h2,h3,h4,h5, small {
+    font-family: 'pc98';
+    text-align: start;
+}
+
+code {
+	font-family: 'pxplus_ibm_vga8regular';
+}

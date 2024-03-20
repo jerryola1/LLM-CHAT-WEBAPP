@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="author" content="your_name">
+    <title>Your Name's Webpage</title>
+    <meta name="og:type" content="website">
+    <meta name="og:title" content="Your Name's Webpage">
+    <script src="stylePicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="font_ibm.css" id="font_stylesheet">
+    <style>
+        body {
+            background-color: #181818;
+            color: #eee;
+            animation: fade_in 750ms;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.1;
+            margin: 0 auto;
+            padding: 15px;
+            font-family: "pxplus_ibm_vga8regular";
+            max-width: 769px;
+            text-align: center;
+        }
+
+        #header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #header_left img {
+            max-width: 100px;
+        }
+
+        h1 {
+            font-size: 64px;
+            padding: 0;
+            margin: 25px 0 0 0;
+            font-weight: initial;
+        }
+
+        #header_right ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menuitem {
+            position: relative;
+            display: inline;
+            text-shadow: 4px 4px #444;
+            margin: 0 16px;
+            text-align: center;
+        }
+
+        a,
+        a:hover,
+        a:active,
+        a:visited {
+            text-decoration: none;
+            color: #1a1;
+        }
+
+        *,
+        *:before,
+        *:after {
+            -webkit-box-sizing: inherit;
+            -moz-box-sizing: inherit;
+            box-sizing: inherit;
+        }
+
+        ul>li {
+            list-style-type: square;
+        }
+
+        #style_picker {
+            margin-top: 20px;
+        }
+
+        #content {
+            margin: 0 auto;
+            padding: 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            #content {
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        h3 {
+            font-size: 20px;
+            margin-top: 30px;
+        }
+
+        #footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-bottom: 20px;
+        }
+
+        #badge {
+            margin-top: 10px;
+        }
+
+        #badge img {
+            max-width: 30px;
+            margin-right: 5px;
+        }
+
+        #terminal {
+            background-color: #000;
+            border: 1px solid #0f0;
+            border-radius: 2px;
+            color: #0f0;
+            font-family: monospace;
+            font-size: 16px;
+            margin: 20px auto;
+            padding: 10px;
+            resize: none;
+            width: 80%;
+            height: 400px;
+            overflow-y: scroll;
+            text-align: left;
+        }
+
+        #terminal-input {
+            background-color: #000;
+            border: none;
+            color: #0f0;
+            font-family: monospace;
+            font-size: 16px;
+            width: 100%;
+            outline: none;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            text-align: left;
+        }
+
+        #terminal-input-container {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        #sendButton {
+            background-color: #0f0;
+            border: none;
+            color: #000;
+            font-family: monospace;
+            font-size: 16px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .user-message {
+            color: #ff0;
+        }
+
+        .assistant-message {
+            color: #0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <div id="header_left">
+            <a href="/">
+                <!-- <img src="your_logo.jpg" alt="Your Logo" title="Your Logo"> -->
+            </a>
+        </div>
+        <div id="header_right">
+            <h1>Your Name's Webpage</h1>
+            <ul>
+                <li class="menuitem"><a href="/">Main</a></li>
+                <li class="menuitem"><a href="/weblog/">Weblog</a></li>
+                <li class="menuitem"><a href="/projects/">Projects</a></li>
+            </ul>
+        </div>
+        <!-- <div id="style_picker">
+            Pick-a-font:<br>
+            <label for="font_ibm">IBM VGA8</label>
+            <input type="radio" name="font" id="font_ibm" checked><br>
+            <label for="font_mono">Monospace</label>
+            <input type="radio" name="font" id="font_mono"><br>
+            <label for="font_chinacat">Chinacat</label>
+            <input type="radio" name="font" id="font_chinacat"><br>
+            <label for="font_sansserif">Sans-serif</label>
+            <input type="radio" name="font" id="font_sansserif">
+        </div> -->
+    </div>
+    <div id="content">
+        <h3>How LLMs Work</h3>
+        <p>
+            Imagine a really smart computer that reads a lot of books and learns from them. It's like a big brain that
+            remembers all the words and sentences it has seen. When you ask the computer a question, it uses what it has
+            learned to come up with an answer. It's like the computer is putting together a puzzle using the pieces of
+            information it has collected from all the books it has read. That's how LLMs, or Language Learning Machines,
+            work!
+        </p>
+        <h3>Interact with LLM</h3>
+        <div id="terminal">
+            <div id="response"></div>
+            <div id="terminal-input-container">
+                <div id="terminal-input" contenteditable="true"></div>
+                <button id="sendButton">Send</button>
+            </div>
+        </div>
+        <hr>
+        <div id="footer">
+            <span>© Your Name 2023, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC
+                    BY-SA</a>
+                <!-- <div id="badge"><a href="/meow.php"><img src="linux.png"></a><img src="thinkpad.png"></div> -->
+            </span>
+        </div>
+    </div>
+    <script src="fixBadlyRenderedFonts.js"></script>
+    <script>
+        const sendButton = document.getElementById('sendButton');
+        const terminalInput = document.getElementById('terminal-input');
+        const responseElement = document.getElementById('response');
+
+        terminalInput.focus();
+
+        sendButton.addEventListener('click', async () => {
+            const userMessage = terminalInput.innerText;
+            terminalInput.innerText = '';
+
+            responseElement.innerHTML += `<p class="user-message">User: ${userMessage}</p>`;
+            responseElement.innerHTML += '<p class="assistant-message">Assistant: ';
+            responseElement.scrollTop = responseElement.scrollHeight;
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userMessage }),
+                });
+
+                if (response.ok) {
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder('utf-8');
+                    let done = false;
+
+                    while (!done) {
+                        const { value, done: readerDone } = await reader.read();
+                        done = readerDone;
+
+                        const chunk = decoder.decode(value);
+                        const messages = chunk.split('\n\n');
+
+                        for (const message of messages) {
+                            if (message.startsWith('data:')) {
+                                const data = message.substring('data:'.length).trim();
+                                if (data !== '[DONE]') {
+                                    const text = data.replace(/\n/g, ' ');
+                                    responseElement.innerHTML += text + ' ';
+                                }
+                            }
+                        }
+                    }
+
+                    responseElement.innerHTML += '</p>';
+                    responseElement.scrollTop = responseElement.scrollHeight;
+                } else {
+                    console.error('Error:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>
