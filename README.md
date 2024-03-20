@@ -32,30 +32,22 @@ Before running the application, ensure that you have the following installed:
 <pre><code onclick="navigator.clipboard.writeText(this.textContent)">git clone https://github.com/your-username/llm-chat-webapp.git</code></pre>
 
 
-Copy code
-
-2. Navigate to the project directory:
-cd llm-chat-webapp
+2. Navigate to the project directory:<pre><code onclick="navigator.clipboard.writeText(this.textContent)">
+cd llm-chat-webapp<code><pre>
 
 
-Copy code
+3. Install the dependencies:<pre><code onclick="navigator.clipboard.writeText(this.textContent)">
+npm install<code><pre>
 
-3. Install the dependencies:
-npm install
-
-
-Copy code
 
 4. Set up the Groq SDK API key:
 - Replace `'your-api-key'` with your actual Groq SDK API key in the `server.js` file.
 
 ## Usage
 
-1. Start the server:
-npm start
+1. Start the server:<pre><code onclick="navigator.clipboard.writeText(this.textContent)">
+npm start<code><pre>
 
-
-Copy code
 
 2. Open your web browser and visit `http://localhost:3000`.
 
