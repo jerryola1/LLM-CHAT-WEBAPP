@@ -238,8 +238,10 @@
             const userMessage = terminalInput.innerText;
             terminalInput.innerText = '';
 
-            responseElement.innerHTML += `<p class="user-message">>${userMessage}</p>`;
-            responseElement.innerHTML += '<p class="assistant-message">';
+            // responseElement.innerHTML += `<p class="user-message">>${userMessage}</p>`;
+            responseElement.innerHTML += `<p class="user-message"><strong>User:</strong> ${userMessage}</p>`;
+            // responseElement.innerHTML += '<p class="assistant-message">';
+            responseElement.innerHTML += '<p class="assistant-message"><strong>Assistant:</strong> ';
             responseElement.scrollTop = responseElement.scrollHeight;
 
             try {

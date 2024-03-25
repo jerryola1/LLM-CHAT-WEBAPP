@@ -17,17 +17,19 @@ app.get('/', (req, res) => {
 app.post('/api/chat', async (req, res) => {
     const userMessage = req.body.userMessage;
 
-    // Add the user message to the conversation history
     conversationHistory.push({ role: 'user', content: userMessage });
 
     const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
     try {
         const stream = await groq.chat.completions.create({
-            messages: conversationHistory,
+            messages: [
+                { role: 'system', content: 'you are a helpful assistant. Provide concise and direct answers to simple questions. Avoid unnecessary details or repetition.' },
+                ...conversationHistory,
+            ],
             model: 'mixtral-8x7b-32768',
-            temperature: 0.5,
-            max_tokens: 1024,
+            temperature: 0.7,
+            max_tokens: 150,
             top_p: 1,
             stop: null,
             stream: true,
@@ -39,9 +41,12 @@ app.post('/api/chat', async (req, res) => {
             Connection: 'keep-alive',
         });
 
+        let assistantResponse = '';
+
         for await (const chunk of stream) {
             const { content } = chunk.choices[0].delta;
             if (content) {
+                assistantResponse += content;
                 res.write(`data: ${content}\n\n`);
             }
         }
@@ -49,12 +54,18 @@ app.post('/api/chat', async (req, res) => {
         res.write(`data: [DONE]\n\n`);
         res.end();
 
-        // Add the assistant response to the conversation history
-        const assistantResponse = conversationHistory[conversationHistory.length - 1].content;
+        // Remove unnecessary spaces from the assistant's response
+        // assistantResponse = assistantResponse.replace(/\s+/g, ' ').trim();
+        // Remove unnecessary spaces from the assistant's response
+        assistantResponse = assistantResponse.replace(/\s+/g, ' ').replace(/\s([.,!?])/g, '$1').replace(/\s+(['])/g, '$1').trim();
         conversationHistory.push({ role: 'assistant', content: assistantResponse });
+
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).json({ error: 'An error occurred' });
+        
+        if (!res.headersSent) {
+            res.status(500).json({ error: 'An error occurred' });
+        }
     }
 });
 
