@@ -167,7 +167,7 @@
             color: #0f0;
         }
 
-        .user-message {
+        /* .user-message {
         color: #0f0;
         margin-bottom: 10px;
         }
@@ -179,7 +179,7 @@
 
         .prompt {
             margin-right: 5px;
-        }
+        } */
     </style>
 </head>
 
@@ -225,65 +225,68 @@
         </div>
     </div>
     <script src="fixBadlyRenderedFonts.js"></script>
-    <script>
-        const terminalInput = document.getElementById('terminal-input');
-        const responseElement = document.getElementById('response');
+    <!-- ... -->
+<script>
+    const terminalInput = document.getElementById('terminal-input');
+    const responseElement = document.getElementById('response');
 
-        terminalInput.focus();
+    terminalInput.focus();
 
-        terminalInput.addEventListener('keydown', async (event) => {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                const userMessage = terminalInput.innerText;
-                terminalInput.innerText = '';
+    terminalInput.addEventListener('keydown', async (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const userMessage = terminalInput.innerText;
+            terminalInput.innerText = '';
 
-                responseElement.innerHTML += `<p class="user-message">>${userMessage}</p>`;
-                responseElement.innerHTML += '<p class="assistant-message">';
-                responseElement.scrollTop = responseElement.scrollHeight;
+            responseElement.innerHTML += `<p class="user-message">>${userMessage}</p>`;
+            responseElement.innerHTML += '<p class="assistant-message">';
+            responseElement.scrollTop = responseElement.scrollHeight;
 
-                try {
-                    const response = await fetch('/api/chat', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ userMessage }),
-                    });
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userMessage }),
+                });
 
-                    if (response.ok) {
-                        const reader = response.body.getReader();
-                        const decoder = new TextDecoder('utf-8');
-                        let done = false;
+                if (response.ok) {
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder('utf-8');
+                    let done = false;
 
-                        while (!done) {
-                            const { value, done: readerDone } = await reader.read();
-                            done = readerDone;
+                    while (!done) {
+                        const { value, done: readerDone } = await reader.read();
+                        done = readerDone;
 
-                            const chunk = decoder.decode(value);
-                            const messages = chunk.split('\n\n');
+                        const chunk = decoder.decode(value);
+                        const messages = chunk.split('\n\n');
 
-                            for (const message of messages) {
-                                if (message.startsWith('data:')) {
-                                    const data = message.substring('data:'.length).trim();
-                                    if (data !== '[DONE]') {
-                                        const text = data.replace(/\n/g, ' ');
-                                        responseElement.innerHTML += text + ' ';
-                                    }
+                        for (const message of messages) {
+                            if (message.startsWith('data:')) {
+                                const data = message.substring('data:'.length).trim();
+                                if (data !== '[DONE]') {
+                                    const text = data.replace(/\n/g, ' ');
+                                    responseElement.innerHTML += text + ' ';
                                 }
                             }
                         }
-
-                        responseElement.innerHTML += '</p>';
-                        responseElement.scrollTop = responseElement.scrollHeight;
-                    } else {
-                        console.error('Error:', response.statusText);
                     }
-                } catch (error) {
-                    console.error('Error:', error);
+
+                    responseElement.innerHTML += '</p>';
+                    responseElement.scrollTop = responseElement.scrollHeight;
+                } else {
+                    console.error('Error:', response.statusText);
                 }
+            } catch (error) {
+                console.error('Error:', error);
             }
-        });
-    </script>
+        }
+    });
+</script>
+<!-- ... -->
+
 </body>
 
 </html>
