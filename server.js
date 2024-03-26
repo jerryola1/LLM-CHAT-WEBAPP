@@ -55,8 +55,6 @@ app.post('/api/chat', async (req, res) => {
         res.end();
 
         // Remove unnecessary spaces from the assistant's response
-        // assistantResponse = assistantResponse.replace(/\s+/g, ' ').trim();
-        // Remove unnecessary spaces from the assistant's response
         assistantResponse = assistantResponse.replace(/\s+/g, ' ').replace(/\s([.,!?])/g, '$1').replace(/\s+(['])/g, '$1').trim();
         conversationHistory.push({ role: 'assistant', content: assistantResponse });
 

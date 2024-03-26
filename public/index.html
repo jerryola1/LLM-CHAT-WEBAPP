@@ -166,20 +166,6 @@
         .assistant-message {
             color: #0f0;
         }
-
-        /* .user-message {
-        color: #0f0;
-        margin-bottom: 10px;
-        }
-
-        .assistant-message {
-            color: #ff0;
-            margin-bottom: 10px;
-        }
-
-        .prompt {
-            margin-right: 5px;
-        } */
     </style>
 </head>
 
@@ -238,9 +224,7 @@
             const userMessage = terminalInput.innerText;
             terminalInput.innerText = '';
 
-            // responseElement.innerHTML += `<p class="user-message">>${userMessage}</p>`;
             responseElement.innerHTML += `<p class="user-message"><strong>User:</strong> ${userMessage}</p>`;
-            // responseElement.innerHTML += '<p class="assistant-message">';
             responseElement.innerHTML += '<p class="assistant-message"><strong>Assistant:</strong> ';
             responseElement.scrollTop = responseElement.scrollHeight;
 
