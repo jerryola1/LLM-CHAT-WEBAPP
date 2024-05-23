@@ -67,6 +67,13 @@ app.post('/api/chat', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+try {
+    app.listen(port, () => {
+        console.log(`Server is running on http://localhost:${port}`);
+    });
+} catch (error) { console.error('Error:', error); }
+
+
+// app.listen(port, () => {
+//     console.log(`Server is running on http://localhost:${port}`);
+// });
